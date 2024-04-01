@@ -1,7 +1,8 @@
 import React, { useState } from "react";
-import { Box, Text, Input, Grid, Image, IconButton, useColorModeValue, VStack, HStack, Heading, Spacer, Flex, Button } from "@chakra-ui/react";
+import { Box, Text, Input, Grid, Image, IconButton, useColorModeValue, VStack, HStack, Heading, Spacer, Flex, Button, Select } from "@chakra-ui/react";
 import { FaHeart, FaSearch, FaShoppingCart } from "react-icons/fa";
 import { Link } from "react-router-dom";
+import Header from "../components/Header";
 
 const products = [
   {
