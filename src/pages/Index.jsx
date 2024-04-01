@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { Box, Text, Input, Grid, Image, IconButton, useColorModeValue, VStack, HStack, Heading, Spacer, Flex, Button } from "@chakra-ui/react";
-import { FaHeart, FaSearch } from "react-icons/fa";
+import { FaHeart, FaSearch, FaShoppingCart } from "react-icons/fa";
+import { Link } from "react-router-dom";
 
 const products = [
   {
@@ -44,6 +45,11 @@ const products = [
 const Index = () => {
   const [searchTerm, setSearchTerm] = useState("");
   const [favorites, setFavorites] = useState([]);
+  const [cartItems, setCartItems] = useState([]);
+
+  const addToCart = (product) => {
+    setCartItems([...cartItems, product]);
+  };
 
   const handleSearch = (e) => {
     setSearchTerm(e.target.value);
@@ -69,6 +75,9 @@ const Index = () => {
         <HStack spacing={4}>
           <Input placeholder="Search products..." value={searchTerm} onChange={handleSearch} />
           <IconButton icon={<FaSearch />} aria-label="Search" variant="outline" />
+          <Link to="/cart">
+            <IconButton icon={<FaShoppingCart />} aria-label="Cart" variant="outline" />
+          </Link>
         </HStack>
       </Flex>
 
@@ -83,6 +92,9 @@ const Index = () => {
               <Text fontWeight="bold">${product.price}</Text>
             </Box>
             <IconButton icon={<FaHeart />} aria-label="Favorite" position="absolute" top={2} right={2} variant={favorites.includes(product.id) ? "solid" : "ghost"} colorScheme="red" onClick={() => toggleFavorite(product.id)} />
+            <Button onClick={() => addToCart(product)} colorScheme="teal" size="sm" position="absolute" bottom={2} right={2}>
+              Add to Cart
+            </Button>
           </VStack>
         ))}
       </Grid>
